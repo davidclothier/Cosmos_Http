@@ -1,0 +1,164 @@
+CONSTANTS  begin
+end
+CLASSES BEGIN
+	cHttpConstants is Struct begin
+		GET_METHOD as Char default "GET"
+		POST_METHOD as Char default "POST"
+		PUT_METHOD as Char default "PUT"
+		PATCH_METHOD as Char default "PATCH"
+		DELETE_METHOD as Char default "DELETE"
+		HTTP_422_UNPROCESSABLE_ENTITY as Integer default 422
+		HTTP_424_FAILED_DEPENDENCY as Integer default 424
+		HTTP_400_BAD_REQUEST as Integer default 400
+		HTTP_200_OK as Integer default 200
+		HTTP_405_METHOD_NOT_ALLOWED as Integer default 405
+		HTTP_404_NOT_FOUND as Integer default 404
+		HTTP_503_SERVICE_UNAVAILABLE as Integer default 503
+		HTTP_401_UNAUTHORIZED as Integer default 401
+		HTTP_204_NO_CONTENT as Integer default 204
+		HTTP_201_CREATED as Integer default 201
+		HTTP_403_FORBIDDEN as Integer default 403
+		HTTP_500_INTERNAL_SERVER_ERROR as Integer default 500
+	end
+	cParameter is Struct begin
+		Key as Char
+		Value as Char
+	end
+	cDictionary is Array [1] of cParameter
+	cRequest is Struct begin
+		Url as Char
+		Method as Char (10)
+		private Headers as cDictionary
+		private QueryParameters as cDictionary
+		Body as JSON
+		ResponseText as Char
+		Response as JSON
+		StatusResponse as Integer
+	end
+END
+objects begin
+	HttpTypes AS cHttpConstants
+end
+CODE CLASS cParameter BEGIN
+//{{CODEBEGIN
+
+//{{CODEEND
+END
+CODE CLASS cDictionary BEGIN
+//{{CODEBEGIN
+public reset
+begin
+    self.Resize( 0 );
+end
+
+public add( pchrKey as char, pchrValue as char ) return boolean
+begin
+    if pchrKey is null or pchrKey.Trim().Length() == 0 then return false;
+
+    self.Resize(self.Size()+1);
+    self[self.Size].Key = pchrKey;
+    self[self.Size].Value = pchrValue;
+    
+    return true;
+end
+//{{CODEEND
+END
+CODE CLASS cRequest BEGIN
+//{{CODEBEGIN
+public reset
+begin
+    self.Url = null;
+    self.Method = null;
+    self.ResponseText = null;
+    self.Response = null;
+    self.StatusResponse = null;
+    self.Headers.reset();
+    self.QueryParameters.reset();
+    self.Body.Clear();
+end
+
+public getQueryFormed() return char
+objects
+begin
+    intI            as integer default 0
+    chrQueryFormed  as char default ''
+    chrFirstChar    as char default ''
+end
+begin
+    if self.Url is null or self.Url.Length() == 0 then return null;
+
+    chrQueryFormed = self.Url;
+
+    if self.QueryParameters.Size() > 0 then
+    begin
+        if chrQueryFormed.Locate("?") == 0 then chrQueryFormed += "?";
+        if chrQueryFormed.Locate("&") > 0 then chrFirstChar = "&";
+
+        for intI = 1 to self.QueryParameters.Size() do
+        begin
+            if intI > 1 then chrQueryFormed += "&";
+            else chrQueryFormed += chrFirstChar;
+            
+            chrQueryFormed += self.QueryParameters[intI].Key + "="+ self.QueryParameters[intI].Value;
+        end
+    end
+
+    return chrQueryFormed;
+end
+
+public send return boolean
+objects
+begin
+    intI            as integer default 0
+    axHttp          as activex 
+    blnResult       as boolean default false
+end
+begin
+    axHttp.CreateActiveXFromProgID("Msxml2.XMLHTTP.6.0");
+
+    if self.Url is null or self.Url.Length() == 0 then return false;
+
+    self.Url = getQueryFormed();
+
+    axHttp.Invoke("open",null,self.Method,self.Url,false);
+    
+    if self.Headers.Size() > 0 then
+    begin
+        for intI = 1 to self.Headers.Size() do
+        begin
+            axHttp.Invoke("setRequestHeader",null,self.Headers[intI].Key,self.Headers[intI].Value);
+        end
+    end
+
+    blnResult = axHttp.Invoke("send",null,"");
+    axHttp.GetProperty("responseText",self.ResponseText);
+    axHttp.GetProperty("status",self.StatusResponse);
+    
+    self.Response.LoadFromChar( self.ResponseText );
+    
+    return blnResult;
+end
+
+public addHeader( pchrKey as char, pchrValue as char ) return boolean
+begin
+    return self.Headers.add( pchrKey, pchrValue );
+end
+
+public addQueryParameter( pchrKey as char, pchrValue as char ) return boolean
+begin
+    return self.QueryParameters.add( pchrKey, pchrValue );
+end
+//{{CODEEND
+END
+CODE BEGIN
+//{{CODEBEGIN
+{+----------- Copyright © 2001-2017, Actions Data S.L. -------------+
+ |                                                                  |
+ | Modulo: INCLUDE_HTTP - Clases para peticiones HTTP               |
+ | Autor:  David Ropero                                             |
+ | Fecha:  Septiembre 2017                                          |
+ |                                                                  |
+ +-----------------------------------------------------------------+}
+//{{CODEEND
+END
+
