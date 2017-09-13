@@ -82,7 +82,6 @@ objects
 begin
     intI            as integer default 0
     chrQueryFormed  as char default ''
-    chrFirstChar    as char default ''
 end
 begin
     if self.Url is null or self.Url.Length() == 0 then return null;
@@ -92,15 +91,14 @@ begin
     if self.QueryParameters.Size() > 0 then
     begin
         if chrQueryFormed.Locate("?") == 0 then chrQueryFormed += "?";
-        if chrQueryFormed.Locate("&") > 0 then chrFirstChar = "&";
+        if chrQueryFormed.Locate("&") > 0 then chrQueryFormed += "&";
 
         for intI = 1 to self.QueryParameters.Size() do
         begin
-            if intI > 1 then chrQueryFormed += "&";
-            else chrQueryFormed += chrFirstChar;
-            
-            chrQueryFormed += self.QueryParameters[intI].Key + "="+ self.QueryParameters[intI].Value;
+            chrQueryFormed += self.QueryParameters[intI].Key +"="+ self.QueryParameters[intI].Value +"&";
         end
+
+        chrQueryFormed = chrQueryFormed[1,chrQueryFormed.Length()-1];
     end
 
     return chrQueryFormed;
