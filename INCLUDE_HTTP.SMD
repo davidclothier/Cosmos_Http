@@ -152,7 +152,7 @@ end
 END
 CODE BEGIN
 //{{CODEBEGIN
-{+----------- Copyright © 2001-2017, Actions Data S.L. -------------+
+{+--------------- GNU General Public License v3.0 ------------------+
  |                                                                  |
  | Modulo: INCLUDE_HTTP - Clases para peticiones HTTP               |
  | Autor:  David Ropero                                             |
