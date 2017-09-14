@@ -12,7 +12,9 @@ Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
 * El resultado se almacena en la propiedad ``Response`` en formato Json.
 * Calcula con precisión de milésimas de segundos el tiempo en resolver la petición
 
-## Ejemplo
+## Ejemplos
+
+### Un ejemplo con paso de parámetros en la query
 
 ```
 private testQueryParameter
