@@ -66,6 +66,9 @@ end
 END
 CODE CLASS cRequest BEGIN
 //{{CODEBEGIN
+{
+    Init method
+}
 public reset
 begin
     self.Url = null;
@@ -79,20 +82,32 @@ begin
     self.Body.Clear();
 end
 
-public traceResponse
-objects
+{
+    Getters
+}    
+
+public getTimeElapsed return decimal
 begin
-    jsnTrace        as Json
-end
-begin
-    jsnTrace.Set( "timeElapsed", self.getTimeElapsed().Char );
-    jsnTrace.Set( "requestStatus", self.StatusResponse );
-    if self.Response is not null then jsnTrace.Set( "requestResponse", self.Response );
-    else jsnTrace.Set( "requestResponse", "null" );
-    
-    jsnTrace.Trace;
+    return (self.timeElapsed)/1000;
 end
 
+{
+    Setters
+}
+
+public addHeader( pchrKey as char, pchrValue as char ) return boolean
+begin
+    return self.Headers.add( pchrKey, pchrValue );
+end
+
+public addQueryParameter( pchrKey as char, pchrValue as char ) return boolean
+begin
+    return self.QueryParameters.add( pchrKey, pchrValue );
+end
+
+{
+    Get the complete url after include query parameters
+}
 public getQueryFormed() return char
 objects
 begin
@@ -120,6 +135,9 @@ begin
     return chrQueryFormed;
 end
 
+{
+    Send the request and store the result into object properties
+}
 public send return boolean
 objects
 begin
@@ -134,7 +152,6 @@ begin
     if self.Url is null or self.Url.Length() == 0 then return false;
 
     self.Url = getQueryFormed();
-
     axHttp.Invoke("open",null,self.Method,self.Url,false);
     
     if self.Headers.Size() > 0 then
@@ -159,19 +176,21 @@ begin
     return blnResult;
 end
 
-public addHeader( pchrKey as char, pchrValue as char ) return boolean
+{
+    A extra method to nest the response with other request properties
+}
+public getResponseWithInfo return Json
+objects
 begin
-    return self.Headers.add( pchrKey, pchrValue );
+    jsnInfo         as Json
 end
-
-public addQueryParameter( pchrKey as char, pchrValue as char ) return boolean
 begin
-    return self.QueryParameters.add( pchrKey, pchrValue );
-end
-
-public getTimeElapsed return decimal
-begin
-    return (self.timeElapsed)/1000;
+    jsnInfo.Set( "timeElapsed", self.getTimeElapsed().Char );
+    jsnInfo.Set( "status", self.StatusResponse );
+    if self.Response is not null then jsnInfo.Set( "response", self.Response );
+    else jsnInfo.Set( "response", "null" );
+    
+    return jsnInfo;
 end
 
 {

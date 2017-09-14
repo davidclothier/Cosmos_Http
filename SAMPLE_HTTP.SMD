@@ -9,7 +9,24 @@ Public dll "kernel32" GetTickCount64() return integer
 
 main
 begin
+    testQueryParameter();
+end
 
+private testQueryParameter
+objects
+begin
+    Request         as cRequest
+end
+begin
+    Request.reset();
+    
+    Request.Url = "http://uinames.com/api/";
+    Request.Method = HttpTypes.GET_METHOD;
+    Request.addQueryParameter( "region", "spain" );
+    Request.addQueryParameter( "ext", "" );
+    Request.send();
+
+    Request.Response.Trace();
 end
 //{{CODEEND
 END
