@@ -4,7 +4,7 @@ Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
 
 ## Clase principal y uso
 
-* La clase ``cRequest`` es la responsable de hacer las peticiones.
+* La clase ```cRequest``` es la responsable de hacer las peticiones.
 * Es necesario inicializar el objeto con el método ``reset`` antes usarlo.
 * Se pueden pasar parámetros en la query
 * Se pueden añadir cabeceras
