@@ -34,6 +34,7 @@ CLASSES BEGIN
 		ResponseText as Char
 		Response as JSON
 		StatusResponse as Integer
+		private timeElapsed as Decimal (6,3)
 	end
 END
 objects begin
@@ -72,9 +73,24 @@ begin
     self.ResponseText = null;
     self.Response = null;
     self.StatusResponse = null;
+    self.timeElapsed = 0;
     self.Headers.reset();
     self.QueryParameters.reset();
     self.Body.Clear();
+end
+
+public traceResponse
+objects
+begin
+    jsnTrace        as Json
+end
+begin
+    jsnTrace.Set( "timeElapsed", self.getTimeElapsed().Char );
+    jsnTrace.Set( "requestStatus", self.StatusResponse );
+    if self.Response is not null then jsnTrace.Set( "requestResponse", self.Response );
+    else jsnTrace.Set( "requestResponse", "null" );
+    
+    jsnTrace.Trace;
 end
 
 public getQueryFormed() return char
@@ -110,6 +126,7 @@ begin
     intI            as integer default 0
     axHttp          as activex 
     blnResult       as boolean default false
+    decSecsInit     as decimal
 end
 begin
     axHttp.CreateActiveXFromProgID("Msxml2.XMLHTTP.6.0");
@@ -128,11 +145,16 @@ begin
         end
     end
 
-    blnResult = axHttp.Invoke("send",null,"");
+    decSecsInit = (GetTickCount64);
+    blnResult = axHttp.Invoke("send",null,self.Body.Char);
+    self.timeElapsed = ( (GetTickCount64) - decSecsInit );
+
     axHttp.GetProperty("responseText",self.ResponseText);
     axHttp.GetProperty("status",self.StatusResponse);
     
     self.Response.LoadFromChar( self.ResponseText );
+
+    fixMSXMLHTTPBugs( blnResult );
     
     return blnResult;
 end
@@ -146,17 +168,43 @@ public addQueryParameter( pchrKey as char, pchrValue as char ) return boolean
 begin
     return self.QueryParameters.add( pchrKey, pchrValue );
 end
+
+public getTimeElapsed return decimal
+begin
+    return (self.timeElapsed)/1000;
+end
+
+{
+    More info about this bug:
+     - https://bugs.dojotoolkit.org/ticket/2418
+     - https://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+}
+private fixMSXMLHTTPBugs( VAR pblnResult as boolean )
+begin
+    if self.StatusResponse == 1223 then
+    begin
+        self.StatusResponse = 204;
+        pblnResult = true;
+    end
+end
 //{{CODEEND
 END
 CODE BEGIN
 //{{CODEBEGIN
 {+--------------- GNU General Public License v3.0 ------------------+
  |                                                                  |
- | Modulo: INCLUDE_HTTP - Clases para peticiones HTTP               |
+ | Modulo: INCLUDE_HTTP                                             |
  | Autor:  David Ropero                                             |
- | Fecha:  Septiembre 2017                                          |
+ | Fecha:  Septembre 2017                                           |
  |                                                                  |
  +-----------------------------------------------------------------+}
+
+{
+  Function API used to calculate elapsed time during the request.
+}  
+
+Public dll "kernel32" GetTickCount64() return integer
+
 //{{CODEEND
 END
 

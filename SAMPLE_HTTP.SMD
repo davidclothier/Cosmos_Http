@@ -3,4 +3,14 @@ INCLUDES BEGIN
 END
 CONSTANTS  begin
 end
+CODE BEGIN
+//{{CODEBEGIN
+Public dll "kernel32" GetTickCount64() return integer
+
+main
+begin
+
+end
+//{{CODEEND
+END
 
