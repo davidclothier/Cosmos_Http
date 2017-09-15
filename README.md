@@ -101,3 +101,5 @@ end
 ## Desarrollado por
 
 * David Ropero Alcázar - david.ropero@gmail.com
+
+![Twitter logo](https://camo.githubusercontent.com/5ec335eaef36e0607272847015f016916fff03cd/68747470733a2f2f696d6167652e6672656570696b2e636f6d2f69636f6e6f732d6772617469732f747769747465722d6c6f676f5f3331382d34303230392e6a7067)
