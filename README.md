@@ -11,7 +11,7 @@ Para versiones iguales o superiores a [Cosmos 6.0](http://www.base100.com/es/pro
 * Se pueden añadir cabeceras
 * Permite los cuatro métodos principales ``GET``, ``POST``, ``UPDATE``,``DELETE``
 * El resultado se almacena en la propiedad ``Response`` en formato Json.
-* Calcula con precisión de milésimas de segundos el tiempo en resolver la petición
+* Calcula con precisión de milésimas de segundos el tiempo en resolver la petición. Se obtiene con el método ```getTimeElapsed```
 * La petición es síncrona
 
 ## Ejemplos
