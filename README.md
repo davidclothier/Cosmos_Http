@@ -1,6 +1,6 @@
 # Cosmos http
 Include para realizar peticiones http en formato Json basada en la librería COM de Microsoft *Msxml2.XMLHTTP*.
-Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
+Para versiones iguales o superiores a [Cosmos 6.0](http://www.base100.com/es/productos/cosmos01.html) (es necesaria la clase Json)
 
 ## Clase principal y uso
 
@@ -36,7 +36,7 @@ end
 ```
 
 ### Un ejemplo con uso de cabeceras
-
+> Ejemplo no operativo por uso de `api-key`
 ```
 private testHeaders
 objects
