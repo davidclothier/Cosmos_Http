@@ -54,3 +54,40 @@ begin
     Request.Response.Trace();
 end
 ```
+
+### Un ejemplo con paso de parámetros en el body
+
+```
+private testBodyParameter
+objects
+begin
+    Request         as cRequest
+    jsnMain         as Json
+    jsnAttributes   as Json
+    jsnListIds      as Json
+end
+begin
+    jsnAttributes.Set( "NAME", "DAVID" );
+    jsnAttributes.Set( "SURNAME", "CLOTHIER" );
+    jsnAttributes.Set( "M123_LUGAR", "OFFICE" );
+    
+    jsnListIds.SetAsArray();
+    jsnListIds.AddArrayElement( 2 );
+    jsnListIds.AddArrayElement( 3 );
+    
+    jsnMain.Set( "attributes", jsnAttributes );
+    jsnMain.Set( "listIds", jsnListIds );
+    jsnMain.Set( "emailBlacklisted", true );
+    jsnMain.Set( "smsBlacklisted", false );
+    
+    Request.reset();
+    Request.Url = "https://api.sendinblue.com/v3/contacts/david.ropero@actionsdata.com";
+    Request.Method = HttpTypes.PUT_METHOD;
+    Request.addHeader( "api-key" , "abcdefg" );
+    Request.addHeader( "Content-Type", "application/json" );
+    Request.Body = jsnMain;
+    Request.send();
+    
+    Request.StatusResponse.Trace;
+end
+```
