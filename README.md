@@ -1,4 +1,6 @@
-# Cosmos http include ![Logo](http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg)
+[<img src="http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg" alt="Cosmos" width="48"/>](http://www.base100.com/es/productos/cosmos01.html)
+
+# Cosmos http include
 Include con una clase *adapter* para realizar peticiones http en formato Json basada en la interfaz COM de Microsoft [*Msxml2.XMLHTTP*](https://es.wikipedia.org/wiki/XMLHttpRequest).
 
 Para versiones iguales o superiores a [Cosmos 6.0](http://www.base100.com/es/productos/cosmos01.html) (es necesaria la clase Json)
