@@ -56,7 +56,7 @@ end
 ```
 
 ### Un ejemplo con paso de parámetros en el body
-
+> Ejemplo no operativo por uso de `api-key`
 ```
 private testBodyParameter
 objects
