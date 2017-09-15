@@ -1,5 +1,3 @@
-<img src="http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg" alt="Cosmos" width="144"/>
-
 # Cosmos http include
 Include con una clase *adapter* para realizar peticiones http en formato Json basada en la interfaz COM de Microsoft [*Msxml2.XMLHTTP*](https://es.wikipedia.org/wiki/XMLHttpRequest).
 
@@ -101,7 +99,7 @@ end
 * Envoltorio para métodos de autenticación como Basic Auth, Digest, OAuth 2.0, etc.
 * Invocación asíncrona con callback
 
-## Desarrollado por
+## Contacto
 
 * David Ropero Alcázar - david.ropero@gmail.com
 
