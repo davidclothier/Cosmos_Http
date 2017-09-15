@@ -27,8 +27,8 @@ begin
     
     Request.Url = "http://uinames.com/api/";
     Request.Method = HttpTypes.GET_METHOD;
-    Request.addQueryParameter( "region", "spain" );
-    Request.addQueryParameter( "ext", "" );
+    **Request.addQueryParameter( "region", "spain" );**
+    **Request.addQueryParameter( "ext", "" );**
     Request.send();
 
     Request.Response.Trace();
@@ -48,7 +48,7 @@ begin
 
     Request.Url = "https://api.sendinblue.com/v3/senders";
     Request.Method = HttpTypes.GET_METHOD;
-    Request.addHeader( "api-key", "abcdefg");
+    **Request.addHeader( "api-key", "abcdefg");**
     Request.send();
 
     Request.Response.Trace();
@@ -85,7 +85,7 @@ begin
     Request.Method = HttpTypes.PUT_METHOD;
     Request.addHeader( "api-key" , "abcdefg" );
     Request.addHeader( "Content-Type", "application/json" );
-    Request.Body = jsnMain;
+    **Request.Body = jsnMain;**
     Request.send();
     
     Request.StatusResponse.Trace;
