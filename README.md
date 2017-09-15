@@ -1,4 +1,4 @@
-<img src="http://www.base100.com/images/logo.png" alt="base100" width="144"/> / <img src="http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg" alt="Cosmos" width="144"/>
+<img src="http://www.base100.com/images/logo.png" alt="base100" width="144"/> kase <img src="http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg" alt="Cosmos" width="144"/>
 
 # Cosmos http include
 Include con una clase *adapter* para realizar peticiones http en formato Json basada en la interfaz COM de Microsoft [*Msxml2.XMLHTTP*](https://es.wikipedia.org/wiki/XMLHttpRequest).
