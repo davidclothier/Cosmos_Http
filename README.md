@@ -99,7 +99,7 @@ end
 ## Mejoras futuras
 
 * Envoltorio para métodos de autenticación como Basic Auth, Digest, OAuth 2.0, etc.
-* Invocación asíncrona con callback
+* Petición asíncrona con callback
 
 ## Contacto
 
