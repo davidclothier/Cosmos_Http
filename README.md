@@ -17,7 +17,6 @@ Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
 ### Un ejemplo con paso de parámetros en la query
 
 ```
-<pre>
 private testQueryParameter
 objects
 begin
@@ -34,7 +33,6 @@ begin
 
     Request.Response.Trace();
 end
-</pre>
 ```
 
 ### Un ejemplo con uso de cabeceras
@@ -50,7 +48,7 @@ begin
 
     Request.Url = "https://api.sendinblue.com/v3/senders";
     Request.Method = HttpTypes.GET_METHOD;
-    **Request.addHeader( "api-key", "abcdefg");**
+    Request.addHeader( "api-key", "abcdefg");
     Request.send();
 
     Request.Response.Trace();
@@ -87,7 +85,7 @@ begin
     Request.Method = HttpTypes.PUT_METHOD;
     Request.addHeader( "api-key" , "abcdefg" );
     Request.addHeader( "Content-Type", "application/json" );
-    **Request.Body = jsnMain;**
+    Request.Body = jsnMain;
     Request.send();
     
     Request.StatusResponse.Trace;
