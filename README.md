@@ -1,3 +1,4 @@
+<img src="http://www.base100.com/images/logo.png" alt="base100" width="144"/>
 <img src="http://www.base100.com/images/productos/cosmos/cosmos_v60.jpg" alt="Cosmos" width="144"/>
 
 # Cosmos http include
