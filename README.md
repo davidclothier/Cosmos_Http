@@ -35,3 +35,22 @@ begin
 end
 ```
 
+### Un ejemplo con uso de cabeceras
+
+```
+private testHeaders
+objects
+begin
+    Request         as cRequest    
+end
+begin
+    Request.reset();
+
+    Request.Url = "https://api.sendinblue.com/v3/senders";
+    Request.Method = HttpTypes.GET_METHOD;
+    Request.addHeader( "api-key", "abcdefg");
+    Request.send();
+
+    Request.Response.Trace();
+end
+```
