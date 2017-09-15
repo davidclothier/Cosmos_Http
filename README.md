@@ -1,5 +1,5 @@
 # Cosmos http
-Include para realizar peticiones http en formato Json basada en la librería de Microsoft *Msxml*.
+Include para realizar peticiones http en formato Json basada en la librería COM de Microsoft *Msxml2.XMLHTTP*.
 Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
 
 ## Clase principal y uso
@@ -91,3 +91,8 @@ begin
     Request.StatusResponse.Trace;
 end
 ```
+
+## Mejoras futuras
+
+* Envoltorio para métodos de autenticación como Basic Auth, Digest, OAuth 2.0, etc.
+* Invocación asíncrona con callback
