@@ -17,6 +17,7 @@ Para versiones iguales o superiores a Cosmos 6.0 (es necesaria la clase Json)
 ### Un ejemplo con paso de parámetros en la query
 
 ```
+<pre>
 private testQueryParameter
 objects
 begin
@@ -27,12 +28,13 @@ begin
     
     Request.Url = "http://uinames.com/api/";
     Request.Method = HttpTypes.GET_METHOD;
-    **Request.addQueryParameter( "region", "spain" );**
-    **Request.addQueryParameter( "ext", "" );**
+    Request.addQueryParameter( "region", "spain" );
+    Request.addQueryParameter( "ext", "" );
     Request.send();
 
     Request.Response.Trace();
 end
+</pre>
 ```
 
 ### Un ejemplo con uso de cabeceras
