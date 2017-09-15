@@ -102,4 +102,4 @@ end
 
 * David Ropero Alcázar - david.ropero@gmail.com
 
-<img src="https://image.freepik.com/iconos-gratis/boton-del-logotipo-de-twitter_318-85053.jpg" alt="Twitter" width="200" height="200"/>
+<img src="https://image.freepik.com/iconos-gratis/boton-del-logotipo-de-twitter_318-85053.jpg" alt="Twitter" width="48"/>
