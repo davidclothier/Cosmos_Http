@@ -2,7 +2,7 @@
 Include para realizar peticiones http en formato Json basada en la interfaz COM de Microsoft [*Msxml2.XMLHTTP*](https://es.wikipedia.org/wiki/XMLHttpRequest).
 Para versiones iguales o superiores a [Cosmos 6.0](http://www.base100.com/es/productos/cosmos01.html) (es necesaria la clase Json)
 
-## Clase principal y uso
+## Uso
 
 * La clase ``cRequest`` es la responsable de hacer las peticiones.
 * Es necesario inicializar el objeto con el método ``reset`` antes usarlo.
@@ -97,3 +97,7 @@ end
 
 * Envoltorio para métodos de autenticación como Basic Auth, Digest, OAuth 2.0, etc.
 * Invocación asíncrona con callback
+
+## Desarrollado por
+
+* David Ropero Alcázar - david.ropero@gmail.com
