@@ -85,7 +85,7 @@ begin
     jsnMain.Set( "smsBlacklisted", false );
     
     Request.reset();
-    Request.Url = "https://api.sendinblue.com/v3/contacts/david.ropero@actionsdata.com";
+    Request.Url = "https://api.sendinblue.com/v3/contacts/david.ropero@gmail.com";
     Request.Method = HttpTypes.PUT_METHOD;
     Request.addHeader( "api-key" , "abcdefg" );
     Request.addHeader( "Content-Type", "application/json" );
