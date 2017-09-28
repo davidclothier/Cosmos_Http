@@ -26,6 +26,28 @@ begin
 
     Request.Response.Trace();
 end
+
+private testBasicAuth
+objects
+begin
+    Request         as cRequest
+end
+begin
+    Request.reset();
+    
+    Request.Url = "https://jigsaw.w3.org/HTTP/Basic/";
+    Request.addBasicAuthHeader( "guest", "guest" );
+    Request.Method = HttpTypes.GET_METHOD;
+    Request.send();
+
+    switch Request.StatusResponse
+    begin
+        case HttpTypes.HTTP_200_OK: "Login Ok".Trace();
+        case HttpTypes.HTTP_401_UNAUTHORIZED: "Unauthorized".Trace();
+        default: "Unknown response".Trace();
+    end
+end
+
 //{{CODEEND
 END
 

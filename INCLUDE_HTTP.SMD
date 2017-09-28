@@ -136,6 +136,28 @@ begin
 end
 
 {
+    Create a header with Basic Auth Authentication method with user and password parameters received
+}
+
+public addBasicAuthHeader( pchrUser as char, pchrPass as char ) return boolean
+objects
+begin
+    chrHeader       as char default ''
+    binString       as binary
+end
+begin
+    if pchrUser is null or pchrUser.Trim().Length() == 0 or pchrPass is null or pchrPass.Trim().Length() == 0 then return false;
+
+    chrHeader = pchrUser +":"+ pchrPass;
+    binString.LoadFromChar( chrHeader );
+    binString.Encode64( chrHeader );
+    chrHeader = "Basic "+chrHeader;
+    self.addHeader( "Authorization", chrHeader );
+    
+    return true;
+end
+
+{
     Send the request and store the result into object properties
 }
 public send return boolean
@@ -147,7 +169,7 @@ begin
     decSecsInit     as decimal
 end
 begin
-    axHttp.CreateActiveXFromProgID("Msxml2.XMLHTTP.6.0");
+    axHttp.CreateActiveXFromProgID("Msxml2.ServerXMLHTTP.6.0");
 
     if self.Url is null or self.Url.Length() == 0 then return false;
 
