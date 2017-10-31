@@ -163,6 +163,7 @@ end
 public send return boolean
 objects
 begin
+    chrQuery        as char default ''
     intI            as integer default 0
     axHttp          as activex 
     blnResult       as boolean default false
@@ -173,12 +174,12 @@ begin
 
     if self.Url is null or self.Url.Length() == 0 then return false;
 
-    self.Url = getQueryFormed();
+    chrQuery = getQueryFormed();
     
     axHttp.Invoke( "open",          // ActiveX Method
                    null,            // Variable to store value return. In this case null
                    self.Method,     // Http Method
-                   self.Url,        // Url target
+                   chrQuery,        // Url target
                    false);          // false = synchronous 
     
     if self.Headers.Size() > 0 then
