@@ -15,6 +15,7 @@ Para versiones iguales o superiores a [Cosmos 6.0](http://www.base100.com/es/pro
 * El resultado se almacena en la propiedad ``Response`` en **formato Json**.
 * Calcula con precisión de milésimas de segundos el **tiempo en resolver la petición**. Se obtiene con el método ```getTimeElapsed```
 * La petición es **síncrona**
+* Simplifica la **autenticación con Basic Auth** con el método ``addBasicAuthHeader``
 
 ## Ejemplos
 
@@ -96,9 +97,33 @@ begin
 end
 ```
 
+### Usando el método para autenticación con Basic Auth
+```
+private testBasicAuth
+objects
+begin
+    Request         as cRequest
+end
+begin
+    Request.reset();
+    
+    Request.Url = "https://jigsaw.w3.org/HTTP/Basic/";
+    Request.addBasicAuthHeader( "guest", "guest" );
+    Request.Method = HttpTypes.GET_METHOD;
+    Request.send();
+
+    switch Request.StatusResponse
+    begin
+        case HttpTypes.HTTP_200_OK: "Login Ok".Trace();
+        case HttpTypes.HTTP_401_UNAUTHORIZED: "Unauthorized".Trace();
+        default: "Unknown response".Trace();
+    end
+end
+```
+
 ## Mejoras futuras
 
-* Envoltorio para métodos de autenticación como Basic Auth, Digest, OAuth 2.0, etc.
+* Envoltorio para otros métodos de autenticación como Digest, OAuth 2.0, etc.
 * Petición asíncrona con callback
 
 ## Contacto
